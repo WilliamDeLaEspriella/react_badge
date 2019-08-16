@@ -3,14 +3,27 @@
 
 // const container = document.getElementById('app');
 
-// container.appendChild(element);
+// container.appendChild(element)
+import React from "react";
+import ReactDOM from "react-dom";
+import 'bootstrap/dist/css/bootstrap.css';
+import './global.css'
+import Badge from './components/Badge'
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-
-const element = <h1>Hello, Platzi Badges!</h1>;
-
-const container = document.getElementById('app');
-
-// ReactDOM.render(__qué__, __dónde__);
-ReactDOM.render(element, container);
+//  const element = <h1>hello, Platzi!</h1>
+// const element = React.createElement(
+//   "a",
+//   { href: "https://platzi.com" },
+//   "hola, a children platzy!"
+// );
+const name = "angela";
+const jsx = (
+  <div>
+    <h1>hola soy, {name}</h1>
+    <p>hola soy, {name}</p>
+  </div>
+);
+// const element =  React.createElement('h1', {name:}, `hola soy ${name}`)
+const container = document.getElementById("app");
+// (que,donde)
+ReactDOM.render(<Badge first_name = "William" last_name = "De la Espriella" twiter = "WilliamDelae"/>, container);
