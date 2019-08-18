@@ -13,7 +13,7 @@ class BadgeFrom extends React.Component {
     return (
       <React.Fragment>
         <h1>New Attendant</h1>
-        <form>
+        <form onSubmit={this.props.handleSumbit}>
           <div className="form-group">
             <label>First Name</label>
             <input
@@ -57,7 +57,6 @@ class BadgeFrom extends React.Component {
             />
           </div>
           <button
-            type="button"
             onClick={this.handleClick}
             className="btn btn-primary"
           >
