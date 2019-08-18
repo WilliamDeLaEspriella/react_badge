@@ -8,7 +8,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import './global.css'
-import Badge from './pages/Badge'
+import App from './components/App'
 
 //  const element = <h1>hello, Platzi!</h1>
 // const element = React.createElement(
@@ -26,4 +26,4 @@ import Badge from './pages/Badge'
 // const element =  React.createElement('h1', {name:}, `hola soy ${name}`)
 const container = document.getElementById("app");
 // (que,donde)
-ReactDOM.render(<Badge />, container);
+ReactDOM.render(<App />, container);
