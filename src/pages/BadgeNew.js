@@ -5,6 +5,7 @@ import BadgeFrom from "../components/BadgeFrom";
 import "./styles/BadgeNew.css";
 import header from "../images/platziconf-logo.svg";
 import api from "../api";
+import PageLoading from "../components/PageLoading";
 class BadgeNew extends React.Component {
   state = {
     form: {
@@ -14,7 +15,7 @@ class BadgeNew extends React.Component {
       jobTitle: "",
       email: ""
     },
-    loading: true,
+    loading: false,
     error: null
   };
 
@@ -34,16 +35,22 @@ class BadgeNew extends React.Component {
       error: null
     });
     try {
-      let res = await api.badges.create(this.state.form);
-      console.log(res)
+      await api.badges.create(this.state.form);
+      // console.log(res)
+      this.setState({
+        loading: false
+      });
+      this.props.history.push('/badges');
     } catch (error) {
       this.setState({
         loading: false,
-        error: true
+        error: error
       });
     }
   };
   render() {
+    // if (this.state.error) return <PageError error={this.state.error}/>;
+    if (this.state.loading === true) return <PageLoading />;
     return (
       <div>
         {/* <Navbar /> */}
@@ -63,10 +70,12 @@ class BadgeNew extends React.Component {
               />
             </div>
             <div className="col-6">
+              <h1>New Attendant</h1>
               <BadgeFrom
                 handleSumbit={this.handleSumbit}
                 onChange={this.handleChange}
                 fromValues={this.state.form}
+                error={this.state.error}
               />
             </div>
           </div>

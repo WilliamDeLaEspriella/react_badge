@@ -12,7 +12,6 @@ class BadgeFrom extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <h1>New Attendant</h1>
         <form onSubmit={this.props.handleSumbit}>
           <div className="form-group">
             <label>First Name</label>
@@ -62,6 +61,7 @@ class BadgeFrom extends React.Component {
           >
             save
           </button>
+          {this.props.error && <p className="text-danger">{this.props.error.message}</p>}
         </form>
       </React.Fragment>
     );
