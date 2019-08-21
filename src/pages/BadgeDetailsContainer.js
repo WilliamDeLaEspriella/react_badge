@@ -3,6 +3,7 @@ import React from "react";
 import "./styles/BadgeDetails.css";
 import api from "../api";
 import BadgeDetails from "./BadgeDetails";
+import { UserRequest } from "../api/index";
 // import DeleteBadgeModal from '../components/DeleteBadgeModal';
 
 class BadgeDetailsContainer extends React.Component {
@@ -20,7 +21,6 @@ class BadgeDetailsContainer extends React.Component {
   };
 
   componentDidMount() {
-    console.log("mount");
     this.fetchData();
   }
   handleCloseModal = e => {
@@ -31,7 +31,6 @@ class BadgeDetailsContainer extends React.Component {
     this.setState({ modalIsOpen: true });
   };
 
-
   handleDeleteBadge = async e => {
     this.setState({ loading: true, error: null });
 
@@ -39,17 +38,18 @@ class BadgeDetailsContainer extends React.Component {
       await api.badges.remove(this.props.match.params.badgeId);
       this.setState({ loading: false });
 
-      this.props.history.push('/badges');
+      this.props.history.push("/badges");
     } catch (error) {
       this.setState({ loading: false, error: error });
     }
   };
   fetchData = async e => {
+    const user_id = this.props.match.params.badgeId;
     this.setState({ loading: true, error: null });
-    console.log("data");
     try {
-      const data = await api.badges.read(this.props.match.params.badgeId);
-      console.log(data);
+      const {
+        data: { data }
+      } = await UserRequest(user_id);
       this.setState({ loading: false, form: data });
     } catch (error) {
       this.setState({ loading: false, error: error });

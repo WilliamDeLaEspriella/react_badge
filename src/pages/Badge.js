@@ -2,11 +2,11 @@ import React from "react";
 // import Navbar from "../components/Navbar";
 import { Link } from "react-router-dom";
 import BadgesList from "../components/BadgesList";
-import PageLoading from '../components/PageLoading';
-import PageError from '../components/PageError';
+import PageLoading from "../components/PageLoading";
+import PageError from "../components/PageError";
 import "./styles/Badges.css";
 import confLogo from "../images/badge-header.svg";
-import Api from "../api";
+import { UsersRequest } from "../api/index";
 class Badge extends React.Component {
   state = {
     loading: true,
@@ -20,14 +20,16 @@ class Badge extends React.Component {
   fetchDate = async () => {
     this.setState({ loading: true, error: null });
     try {
-      const data = await Api.badges.list();
+      const {
+        data: { data }
+      } = await UsersRequest();
       this.setState({ loading: false, data: data });
     } catch (error) {
       this.setState({ loading: false, error: error });
     }
   };
   render() {
-    if (this.state.error) return <PageError error={this.state.error}/>;
+    if (this.state.error) return <PageError error={this.state.error} />;
     if (this.state.loading === true) return <PageLoading />;
     if (this.state.data.length === 0) {
       return (
