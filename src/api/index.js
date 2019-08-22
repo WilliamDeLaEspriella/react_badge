@@ -12,3 +12,7 @@ export const UsersRequest = async () => {
 export const UserRequest = async user_id => {
     return await axios.get(`users/${user_id}`)
 };
+
+export const DeleteUserRequest = async user_id => {
+    return await axios.delete(`users/${user_id}`)
+};

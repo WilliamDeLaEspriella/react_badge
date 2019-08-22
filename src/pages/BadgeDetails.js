@@ -29,10 +29,6 @@ function BadgeDetails(props) {
           <div className="col">
             <Badge
               badge={badge}
-              isOpen={props.modalIsOpen}
-              isClose={props.onCloseModal}
-              onDeleteBadge={props.onDeleteBadge}
-              onOpenModal={props.onOpenModal}
             />
           </div>
           <div className="col">

@@ -1,11 +1,28 @@
 import React from "react";
+import { connect } from "react-redux";
 import "./styles/Badge.css";
 import confLogo from "../images/badge-header.svg";
 import Gravatar from "./Gravatar";
 import { Link } from "react-router-dom";
 import DeleteBadgeModal from "./DeleteBadgeModal";
+import * as badgesActions from "../actions/badgesActions";
 
 class Badge extends React.Component {
+  state = {
+    modalIsOpen: false
+  };
+  handleCloseModal = async e => {
+    console.log("close");
+    this.setState({ modalIsOpen: false });
+  };
+
+  handleOpenModal = e => {
+    this.setState({ modalIsOpen: true });
+  };
+
+  handleDeleteBadge = async e => {
+    await this.props.deleteBadges(this.props.badge.id);
+  };
   showAction = () => (
     <div className="Badge__section-name">
       <div className="row">
@@ -19,11 +36,16 @@ class Badge extends React.Component {
         </div>
 
         <div className="margen__div">
-          <button  onClick = {this.props.onOpenModal} className="btn btn-danger">Delete</button>
+          <button onClick={this.handleOpenModal} className="btn btn-danger">
+            Delete
+          </button>
           <DeleteBadgeModal
-            isOpen={this.props.isOpen}
-            isClose={this.props.isClose}
-            onDeleteBadge={this.props.onDeleteBadge}
+            isOpen={this.state.modalIsOpen}
+            onClose={e => {
+              console.log("close");
+              this.setState({ modalIsOpen: false });
+            }}
+            onDeleteBadge={this.handleDeleteBadge}
           />
         </div>
       </div>
@@ -53,4 +75,8 @@ class Badge extends React.Component {
     );
   }
 }
-export default Badge;
+const mapStateToProps = reducers => reducers.badgesReducer;
+export default connect(
+  mapStateToProps,
+  badgesActions
+)(Badge);

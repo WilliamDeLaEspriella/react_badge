@@ -1,5 +1,6 @@
 import {
   TRAER_BADGES,
+  DELETE_BADGES,
   ENCONTRAR_BADGES,
   CARGANDO,
   ERROR
@@ -24,6 +25,12 @@ export default (state = INITAL_STATE, action) => {
       return {
         ...state,
         badge: action.payload,
+        cargando: false,
+        error: undefined
+      };
+    case DELETE_BADGES:
+      return {
+        ...state,
         cargando: false,
         error: undefined
       };

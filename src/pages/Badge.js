@@ -8,12 +8,6 @@ import * as badgesActions from "../actions/badgesActions";
 import "./styles/Badges.css";
 import confLogo from "../images/badge-header.svg";
 class Badge extends React.Component {
-  state = {
-    loading: true,
-    data: undefined,
-    error: null
-  };
-
   componentDidMount() {
     this.props.traerBadges();
   }
