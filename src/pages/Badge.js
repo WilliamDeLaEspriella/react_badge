@@ -7,7 +7,6 @@ import PageError from "../components/PageError";
 import * as badgesActions from "../actions/badgesActions";
 import "./styles/Badges.css";
 import confLogo from "../images/badge-header.svg";
-import { UsersRequest } from "../api/index";
 class Badge extends React.Component {
   state = {
     loading: true,

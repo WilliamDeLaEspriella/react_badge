@@ -1,27 +1,18 @@
 import React from "react";
-
+import { connect } from "react-redux";
 import "./styles/BadgeDetails.css";
 import api from "../api";
 import BadgeDetails from "./BadgeDetails";
-import { UserRequest } from "../api/index";
+import * as badgesActions from "../actions/badgesActions";
 // import DeleteBadgeModal from '../components/DeleteBadgeModal';
 
 class BadgeDetailsContainer extends React.Component {
   state = {
-    loading: true,
-    error: null,
-    modalIsOpen: false,
-    form: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      jobTitle: "",
-      twitter: ""
-    }
-  };
-
+    modalIsOpen:false
+  }
   componentDidMount() {
-    this.fetchData();
+    const user_id = this.props.match.params.badgeId;
+    this.props.encontrarBadges(user_id);
   }
   handleCloseModal = e => {
     this.setState({ modalIsOpen: false });
@@ -43,20 +34,9 @@ class BadgeDetailsContainer extends React.Component {
       this.setState({ loading: false, error: error });
     }
   };
-  fetchData = async e => {
-    const user_id = this.props.match.params.badgeId;
-    this.setState({ loading: true, error: null });
-    try {
-      const {
-        data: { data }
-      } = await UserRequest(user_id);
-      this.setState({ loading: false, form: data });
-    } catch (error) {
-      this.setState({ loading: false, error: error });
-    }
-  };
+
   render() {
-    const badge = this.state.form;
+    const badge = this.props.badge;
     return (
       <BadgeDetails
         onCloseModal={this.handleCloseModal}
@@ -69,4 +49,8 @@ class BadgeDetailsContainer extends React.Component {
   }
 }
 
-export default BadgeDetailsContainer;
+const mapStateToProps = reducers => reducers.badgesReducer;
+export default connect(
+  mapStateToProps,
+  badgesActions
+)(BadgeDetailsContainer);
