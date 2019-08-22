@@ -3,7 +3,8 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.10);
   border-radius: 8px 8px 8px 8px;
   overflow: hidden;
-  height: 380px;
+  margin-bottom: 100px;
+  height: 450px;
 }
 
 .Badge__header {
@@ -46,4 +47,8 @@
   color: #98CA3F;
   font-weight: bold;
   font-style: italic;
+}
+
+.margen__div{
+  margin-left: 40px;
 }

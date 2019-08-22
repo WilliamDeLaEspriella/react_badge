@@ -1,9 +1,10 @@
 import React from "react";
-// import Navbar from "../components/Navbar";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import BadgesList from "../components/BadgesList";
 import PageLoading from "../components/PageLoading";
 import PageError from "../components/PageError";
+import * as badgesActions from "../actions/badgesActions";
 import "./styles/Badges.css";
 import confLogo from "../images/badge-header.svg";
 import { UsersRequest } from "../api/index";
@@ -15,23 +16,23 @@ class Badge extends React.Component {
   };
 
   componentDidMount() {
-    this.fetchDate();
+    this.props.traerBadges();
   }
-  fetchDate = async () => {
-    this.setState({ loading: true, error: null });
-    try {
-      const {
-        data: { data }
-      } = await UsersRequest();
-      this.setState({ loading: false, data: data });
-    } catch (error) {
-      this.setState({ loading: false, error: error });
-    }
-  };
+  // fetchDate = async () => {
+  //   this.setState({ loading: true, error: null });
+  //   try {
+  //     const {
+  //       data: { data }
+  //     } = await UsersRequest();
+  //     this.setState({ loading: false, data: data });
+  //   } catch (error) {
+  //     this.setState({ loading: false, error: error });
+  //   }
+  // };
   render() {
-    if (this.state.error) return <PageError error={this.state.error} />;
-    if (this.state.loading === true) return <PageLoading />;
-    if (this.state.data.length === 0) {
+    if (this.props.error) return <PageError error={this.props.error} />;
+    if (this.props.cargando === true) return <PageLoading />;
+    if (this.props.badges.length === 0) {
       return (
         <div>
           <h3>No badge where found</h3>
@@ -59,11 +60,15 @@ class Badge extends React.Component {
               new badge
             </Link>
           </div>
-          <BadgesList badges={this.state.data} />
+          <BadgesList badges={this.props.badges} />
         </div>
       </div>
     );
   }
 }
 
-export default Badge;
+const mapStateToProps = reducers => reducers.badgesReducer;
+export default connect(
+  mapStateToProps,
+  badgesActions
+)(Badge);

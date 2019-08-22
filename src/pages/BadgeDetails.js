@@ -30,37 +30,18 @@ function BadgeDetails(props) {
         <div className="row">
           <div className="col">
             <Badge
-              firstName={badge.first_name}
-              lastName={badge.last_name}
-              email={badge.email}
-              avatar={badge.avatar}
-              twitter={badge.first_name}
-              jobTitle={badge.last_name}
+              badge={badge}
+              isOpen={props.modalIsOpen}
+              isClose={props.onCloseModal}
+              onDeleteBadge={props.onDeleteBadge}
+              onOpenModal={props.onOpenModal}
             />
           </div>
           <div className="col">
             <h2>Actions</h2>
-            <div>
-              <div>
-                <Link
-                  className="btn btn-primary mb-4"
-                  to={`/badges/${badge.id}/edit`}
-                >
-                  Edit
-                </Link>
-              </div>
-
-              <div>
-                <button onClick={props.onOpenModal} className="btn btn-danger">
-                  Delete
-                </button>
-                <DeleteBadgeModal
-                  isOpen={props.modalIsOpen}
-                  isClose={props.onCloseModal}
-                  onDeleteBadge={props.onDeleteBadge}
-                />
-              </div>
-            </div>
+            
+     
+            
           </div>
         </div>
       </div>

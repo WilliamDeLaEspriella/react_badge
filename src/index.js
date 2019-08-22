@@ -6,24 +6,23 @@
 // container.appendChild(element)
 import React from "react";
 import ReactDOM from "react-dom";
-import 'bootstrap/dist/css/bootstrap.css';
-import './global.css'
-import App from './components/App'
-
-//  const element = <h1>hello, Platzi!</h1>
-// const element = React.createElement(
-//   "a",
-//   { href: "https://platzi.com" },
-//   "hola, a children platzy!"
-// );
-// const name = "angela";
-// const jsx = (
-//   <div>
-//     <h1>hola soy, {name}</h1>
-//     <p>hola soy, {name}</p>
-//   </div>
-// );
-// const element =  React.createElement('h1', {name:}, `hola soy ${name}`)
+import "bootstrap/dist/css/bootstrap.css";
+import "./global.css";
+import App from "./components/App";
+import { createStore, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import reduxThunk from "redux-thunk";
+import reducers from "./reducers";
+const store = createStore(
+  reducers, // todos los reducers
+  {},
+  applyMiddleware(reduxThunk) // estado incial
+);
 const container = document.getElementById("app");
 // (que,donde)
-ReactDOM.render(<App />, container);
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  container
+);
